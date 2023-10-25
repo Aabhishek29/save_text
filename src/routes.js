@@ -11,7 +11,8 @@ const Stack = createStackNavigator();
 
 const linking = {
   prefixes: [
-      "http://localhost:19006"
+      "http://localhost:19006",
+      "https://save-text.vercel.app/"
   ],
   config: {
 		screens: {
