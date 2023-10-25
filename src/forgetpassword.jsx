@@ -11,16 +11,21 @@ import {
 	TouchableOpacity
 } from 'react-native';
 
-const Login = ({navigation}) => {
-	const [email, setEmail] = useState("");
-	const [pswd, setPswd] = useState("");
+const ForgetPassword = ({navigation}) => {
+	const [a, setA] = useState("");
+	const [b, setB] = useState("");
+    const [c, setC] = useState("");
+    const [d, setD] = useState("");
+    const [e, setE] = useState("");
+    const [f, setF] = useState("");
+
 
     const signupScreen = () =>{
         navigation.navigate("SignUp")
     }
 
 	const forgetPassword = () => {
-		navigation.navigate("ForgetPassword")
+		// forget password
 	}
 
 	const loginUser = () => {
@@ -31,7 +36,7 @@ const Login = ({navigation}) => {
 		<SafeAreaView style={styles.container}>
 			<View style={styles.scrollContainer}>
 				<View style={styles.loginContainer}>
-					<Text style={styles.label1}>Login</Text>
+					<Text style={styles.label1}>Forget Password</Text>
 					<Text style={styles.label2}>
 						Don't have account an account?{" "}
 						<Text onPress={signupScreen} style={styles.link}>
@@ -39,28 +44,51 @@ const Login = ({navigation}) => {
 						</Text>
 					</Text>
 					<View style={{marginTop: 50}}>
-						<Text style={styles.label2}>Email Address</Text>
-						<TextInput
-							value={email}
-							onChangeText={setEmail}
-							placeholder="Example@email.com"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<Text style={[styles.label2, {marginTop: 20}]}>Password</Text>
-						<TextInput
-							value={pswd}
-							onChangeText={setPswd}
-							placeholder="Enter 6 characters or more"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<View style={{justifyContent: 'flex-end', alignItems: 'flex-end',marginTop: 5}}>
-							<Text onPress={forgetPassword} style={styles.link}>Forget Password?</Text>
+						<Text style={styles.label2}>Enter 6 Digit OTP </Text>
+                        <View style={{display: 'flex', flexDirection: 'row'}}>
+						    <TextInput
+						    	value={a}
+						    	onChangeText={setA}
+						    	placeholderTextColor={"#a8a8a8"}
+						    	style={styles.textInput}
+						    />
+                            <TextInput
+							    value={b}
+							    onChangeText={setB}
+							    placeholderTextColor={"#a8a8a8"}
+							    style={styles.textInput}
+						    />
+                            <TextInput
+							    value={c}
+							    onChangeText={setC}
+							    placeholderTextColor={"#a8a8a8"}
+							    style={styles.textInput}
+						    />
+                            <TextInput
+							    value={d}
+							    onChangeText={setD}
+							    placeholderTextColor={"#a8a8a8"}
+							    style={styles.textInput}
+						    />
+                            <TextInput
+							    value={e}
+							    onChangeText={setE}
+							    placeholderTextColor={"#a8a8a8"}
+							    style={styles.textInput}
+						    />
+                            <TextInput
+							    value={f}
+							    onChangeText={setF}
+							    placeholderTextColor={"#a8a8a8"}
+							    style={styles.textInput}
+						    />
+                        </View>
+                        <View style={{justifyContent: 'flex-end', alignItems: 'flex-end',marginTop: 5}}>
+							<Text style={styles.link}>Resend OTP?</Text>
 						</View>
 						<View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
 							<TouchableOpacity style={styles.loginBtn}>
-								<Text style={{color: 'white', fontWeight: '500'}}>Login</Text>
+								<Text style={{color: 'white', fontWeight: '500'}}>Verify OTP</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -109,9 +137,13 @@ const styles = StyleSheet.create({
 		textDecorationLine: 'underline'
 	},
 	textInput: {
+        width: 50,
 		padding: 10,
 		marginTop: 10,
-		borderWidth: 1,
+		borderWidth: 4,
+        borderRadius: 10,
+        marginTop: 50,
+        marginRight: 20,
 		fontWeight: '500',
 		borderColor: '#a8a8a8'
 	},
@@ -131,4 +163,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default Login;
+export default ForgetPassword;
