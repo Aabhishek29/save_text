@@ -9,27 +9,40 @@ import {
 	Platform,
 	TextInput,
 	TouchableOpacity,
-	Button
+	Button,
+	ImageBackground
 } from 'react-native';
 
 const Home = ({navigation}) => {
-	const [email, setEmail] = useState("");
-	const [pswd, setPswd] = useState("");
-
-	const forgetPassword = () => {
-		// forget password
+	
+	const navigateToLogin = () => {
+		navigation.navigate("Login");
 	}
 
-	const loginUser = () => {
-		// login User
+	const navigateToSignUp = () => {
+		navigation.navigate("SignUp");
 	}
-
 	return (
 		<SafeAreaView style={styles.container}>
-			<Button onPress={()=> {
-				console.log(navigation)
-				navigation.navigate("SignUp")
-			}} title="Press" />
+			<ImageBackground source={require('../assets/home_background.jpg')} style={styles.container}>
+				<View style={{width: '100%', padding: 10, backgroundColor: '#fff', display: 'flex', flexDirection: 'row'}}>
+					{/* <Image source={require('../assets/save_text.png')} style={{height: 50, width: 80}}  /> */}
+					<Text style={{fontSize: 32, color: '#000', fontWeight: '700', fontFamily: 'Roboto', marginLeft: '5%'}}>SaveText</Text>
+				</View>
+				<View style={styles.contentView}>
+					<Text style={{fontSize: 46, color: '#000', fontWeight: '700', fontFamily: 'Roboto', marginLeft: '5%'}}>Welcome To SaveText</Text>
+					<Text style={{fontSize: 26, color: '#000', fontWeight: '700', fontFamily: 'Roboto', marginLeft: '5%', marginTop: 30}}>Secure workspace to store and access your confidential documents</Text>
+					<View style={{width: '50%', justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
+						<TouchableOpacity style={styles.loginBtn} onPress={navigateToLogin}>
+							<Text style={{color: 'white', fontWeight: '500'}}>Login</Text>
+						</TouchableOpacity>
+						<Text style={{fontSize: 26, color: '#000', fontWeight: '700', fontFamily: 'Roboto', marginTop: 30, marginBottom: 30}}>OR</Text>
+						<TouchableOpacity style={styles.loginBtn} onPress={navigateToSignUp}>
+							<Text style={{color: 'white', fontWeight: '500'}}>Don't have account? SignUp</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
+			</ImageBackground>
 		</SafeAreaView>
 	)
 }
@@ -37,21 +50,6 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#a8a8a8',
-	},
-	scrollContainer: {
-		flex: 1,
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	loginContainer: { 
-		flex: Platform.OS === "web" ? 0.4 : 1,
-		backgroundColor: '#fff',
-		marginRight: 50,
-		padding: 50,
-		borderRadius: 15
 	},
 	label1: {
 		fontSize: 22,
@@ -69,19 +67,10 @@ const styles = StyleSheet.create({
 		fontWeight: '500',
 		textDecorationLine: 'underline'
 	},
-	textInput: {
-		padding: 10,
-		marginTop: 10,
-		borderWidth: 1,
-		fontWeight: '500',
-		borderColor: '#a8a8a8'
-	},
-	image: {
-		width: 350,
-		height: 350,
-		borderRadius: 15,
-		elevation: 20,
-    	shadowColor: '#52006A',
+	contentView: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	loginBtn: {
 		backgroundColor: '#075ef5',

@@ -8,7 +8,8 @@ import {
 	StyleSheet,
 	Platform,
 	TextInput,
-	TouchableOpacity
+	TouchableOpacity,
+	ImageBackground
 } from 'react-native';
 
 const SignUp = ({navigation}) => {
@@ -26,59 +27,61 @@ const SignUp = ({navigation}) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.scrollContainer}>
-				<View style={styles.loginContainer}>
-					<Text style={styles.label1}>SignUp</Text>
-					<Text style={styles.label2}>
-						Already have an account?{" "}
-						<Text onPress={loginScreen} style={styles.link}>
-							Login
+			<ImageBackground source={require('../assets/app_bg.jpg')} style={styles.container}>
+				<View style={styles.scrollContainer}>
+					<View style={styles.loginContainer}>
+						<Text style={styles.label1}>SignUp</Text>
+						<Text style={styles.label2}>
+							Already have an account?{" "}
+							<Text onPress={loginScreen} style={styles.link}>
+								Login
+							</Text>
 						</Text>
-					</Text>
-					<View style={{marginTop: 50}}>
-                    <Text style={styles.label2}>Name</Text>
-						<TextInput
-							value={name}
-							onChangeText={setName}
-							placeholder="mark"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<Text style={[styles.label2, {marginTop: 20}]}>Email Address</Text>
-						<TextInput
-							value={email}
-							onChangeText={setEmail}
-							placeholder="Example@email.com"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<Text style={[styles.label2, {marginTop: 20}]}>Password</Text>
-						<TextInput
-							value={pswd}
-							onChangeText={setPswd}
-							placeholder="Enter 6 characters or more"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-                        <Text style={[styles.label2, {marginTop: 20}]}>Confirm Password</Text>
-						<TextInput
-							value={pswd}
-							onChangeText={setPswd}
-							placeholder="Enter 6 characters or more"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
-							<TouchableOpacity style={styles.loginBtn} onPress={signupUser}>
-								<Text style={{color: 'white', fontWeight: '500'}}>SignUp</Text>
-							</TouchableOpacity>
+						<View style={{marginTop: 50}}>
+            	        <Text style={styles.label2}>Name</Text>
+							<TextInput
+								value={name}
+								onChangeText={setName}
+								placeholder="mark"
+								placeholderTextColor={"#a8a8a8"}
+								style={styles.textInput}
+							/>
+							<Text style={[styles.label2, {marginTop: 20}]}>Email Address</Text>
+							<TextInput
+								value={email}
+								onChangeText={setEmail}
+								placeholder="Example@email.com"
+								placeholderTextColor={"#a8a8a8"}
+								style={styles.textInput}
+							/>
+							<Text style={[styles.label2, {marginTop: 20}]}>Password</Text>
+							<TextInput
+								value={pswd}
+								onChangeText={setPswd}
+								placeholder="Enter 6 characters or more"
+								placeholderTextColor={"#a8a8a8"}
+								style={styles.textInput}
+							/>
+            	            <Text style={[styles.label2, {marginTop: 20}]}>Confirm Password</Text>
+							<TextInput
+								value={pswd}
+								onChangeText={setPswd}
+								placeholder="Enter 6 characters or more"
+								placeholderTextColor={"#a8a8a8"}
+								style={styles.textInput}
+							/>
+							<View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
+								<TouchableOpacity style={styles.loginBtn} onPress={signupUser}>
+									<Text style={{color: 'white', fontWeight: '500'}}>SignUp</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					</View>
+					<View>
+						<Image source={require("../assets/save_text_icon.png")} style={styles.image} />
+					</View>
 				</View>
-				<View>
-					<Image source={require("../assets/save_text_icon.png")} style={styles.image} />
-				</View>
-			</View>
+			</ImageBackground>
 		</SafeAreaView>
 	)
 }
@@ -100,7 +103,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		marginRight: 50,
 		padding: 50,
-		borderRadius: 15
+		borderRadius: 15,
+		borderWidth: 5,
+		borderColor: '#a8a8a8'
 	},
 	label1: {
 		fontSize: 22,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  View,
+	View,
 	Text,
 	SafeAreaView,
 	Image,
@@ -8,16 +8,17 @@ import {
 	StyleSheet,
 	Platform,
 	TextInput,
-	TouchableOpacity
+	TouchableOpacity,
+	ImageBackground
 } from 'react-native';
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
 	const [email, setEmail] = useState("");
 	const [pswd, setPswd] = useState("");
 
-    const signupScreen = () =>{
-        navigation.navigate("SignUp")
-    }
+	const signupScreen = () => {
+		navigation.navigate("SignUp")
+	}
 
 	const forgetPassword = () => {
 		navigation.navigate("ForgetPassword")
@@ -29,46 +30,48 @@ const Login = ({navigation}) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.scrollContainer}>
-				<View style={styles.loginContainer}>
-					<Text style={styles.label1}>Login</Text>
-					<Text style={styles.label2}>
-						Don't have account an account?{" "}
-						<Text onPress={signupScreen} style={styles.link}>
-							SignUp
+			<ImageBackground source={require('../assets/app_bg.jpg')} style={styles.container}>
+				<View style={styles.scrollContainer}>
+					<View style={styles.loginContainer}>
+						<Text style={styles.label1}>Login</Text>
+						<Text style={styles.label2}>
+							Don't have account an account?{" "}
+							<Text onPress={signupScreen} style={styles.link}>
+								SignUp
+							</Text>
 						</Text>
-					</Text>
-					<View style={{marginTop: 50}}>
-						<Text style={styles.label2}>Email Address</Text>
-						<TextInput
-							value={email}
-							onChangeText={setEmail}
-							placeholder="Example@email.com"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<Text style={[styles.label2, {marginTop: 20}]}>Password</Text>
-						<TextInput
-							value={pswd}
-							onChangeText={setPswd}
-							placeholder="Enter 6 characters or more"
-							placeholderTextColor={"#a8a8a8"}
-							style={styles.textInput}
-						/>
-						<View style={{justifyContent: 'flex-end', alignItems: 'flex-end',marginTop: 5}}>
-							<Text onPress={forgetPassword} style={styles.link}>Forget Password?</Text>
-						</View>
-						<View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
-							<TouchableOpacity style={styles.loginBtn}>
-								<Text style={{color: 'white', fontWeight: '500'}}>Login</Text>
-							</TouchableOpacity>
+						<View style={{ marginTop: 50 }}>
+							<Text style={styles.label2}>Email Address</Text>
+							<TextInput
+								value={email}
+								onChangeText={setEmail}
+								placeholder="Example@email.com"
+								placeholderTextColor={"#a8a8a8"}
+								style={styles.textInput}
+							/>
+							<Text style={[styles.label2, { marginTop: 20 }]}>Password</Text>
+							<TextInput
+								value={pswd}
+								onChangeText={setPswd}
+								placeholder="Enter 6 characters or more"
+								placeholderTextColor={"#a8a8a8"}
+								style={styles.textInput}
+							/>
+							<View style={{ justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 5 }}>
+								<Text onPress={forgetPassword} style={styles.link}>Forget Password?</Text>
+							</View>
+							<View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+								<TouchableOpacity style={styles.loginBtn}>
+									<Text style={{ color: 'white', fontWeight: '500' }}>Login</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					</View>
+					<View>
+						<Image source={require("../assets/save_text_icon.png")} style={styles.image} />
+					</View>
 				</View>
-				<View>
-					<Image source={require("../assets/save_text_icon.png")} style={styles.image} />
-				</View>
-			</View>
+			</ImageBackground>
 		</SafeAreaView>
 	)
 }
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	loginContainer: { 
+	loginContainer: {
 		flex: Platform.OS === "web" ? 0.4 : 1,
 		backgroundColor: '#fff',
 		marginRight: 50,
@@ -103,8 +106,8 @@ const styles = StyleSheet.create({
 		fontWeight: '500'
 	},
 	link: {
-		color: 'blue', 
-		fontSize: 12, 
+		color: 'blue',
+		fontSize: 12,
 		fontWeight: '500',
 		textDecorationLine: 'underline'
 	},
@@ -120,13 +123,13 @@ const styles = StyleSheet.create({
 		height: 350,
 		borderRadius: 15,
 		elevation: 20,
-    	shadowColor: '#52006A',
+		shadowColor: '#52006A',
 	},
 	loginBtn: {
 		backgroundColor: '#075ef5',
-		padding: 10, width: '50%', 
-		justifyContent: 'center', 
-		alignItems: 'center', 
+		padding: 10, width: '50%',
+		justifyContent: 'center',
+		alignItems: 'center',
 		borderRadius: 10
 	}
 })
