@@ -6,9 +6,9 @@ import {navigationRef} from './RootNavigation'
 import Login from "./login";
 import SignUp from "./signup";
 import ForgetPassword from "./forgetpassword";
+import Dashboard from "./dashboard";
 
 const Stack = createStackNavigator();
-
 
 const linking = {
   prefixes: [
@@ -23,7 +23,8 @@ const linking = {
     	    Home: '/',
 					Login: '/login',
 					SignUp: '/signup',
-          ForgetPassword: '/forgetpassword'
+          ForgetPassword: '/forgetpassword',
+          Dashboard: '/dashboard'
     	  }
     	}
 		}
@@ -32,6 +33,7 @@ const linking = {
 
 
 const Routes = () => {
+
   return(
     <NavigationContainer
 			ref={navigationRef}
@@ -45,6 +47,7 @@ const Routes = () => {
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} options={{ headerShown: false }} />
+        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

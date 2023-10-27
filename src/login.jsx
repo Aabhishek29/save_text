@@ -9,12 +9,17 @@ import {
 	Platform,
 	TextInput,
 	TouchableOpacity,
-	ImageBackground
+	ImageBackground,
+	ActivityIndicator
 } from 'react-native';
+import { serverUrl } from '../src/RootNavigation';
+import axios from "axios";
 
 const Login = ({ navigation }) => {
 	const [email, setEmail] = useState("");
 	const [pswd, setPswd] = useState("");
+	const [showError, setShowError] = useState(false);
+	const [loading, showLoading] = useState(false);
 
 	const signupScreen = () => {
 		navigation.navigate("SignUp")
@@ -24,8 +29,29 @@ const Login = ({ navigation }) => {
 		navigation.navigate("ForgetPassword")
 	}
 
-	const loginUser = () => {
-		// login User
+	const loginUser = async () => {
+		setShowError(false);
+		if (email === "" || pswd === "")
+			return;
+		showLoading(true);
+		const url = serverUrl + "/authenticate";
+		console.log(url);
+		const payload = {
+			userName: email,
+			password: pswd
+		}
+		let resp = await axios.post(url, payload)
+			.catch((err) => console.log(err));
+		if (resp && resp.data && resp.data.status == "success") {
+			if (resp.data.authenticated == "true") {
+				navigation.replace("Dashboard");
+			} else {
+				setShowError(true);
+			}
+		} else {
+			// show toast message something went wrong please try again
+		}
+		showLoading(false);
 	}
 
 	return (
@@ -60,10 +86,15 @@ const Login = ({ navigation }) => {
 							<View style={{ justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 5 }}>
 								<Text onPress={forgetPassword} style={styles.link}>Forget Password?</Text>
 							</View>
+							{showError && <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
+								<Text style={styles.error}>Incorrect email or Password</Text>
+							</View>}
 							<View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
-								<TouchableOpacity style={styles.loginBtn}>
+								{loading ? (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+									<ActivityIndicator size={'large'} color={'blue'} />
+								</View>) : (<TouchableOpacity style={styles.loginBtn} onPress={loginUser}>
 									<Text style={{ color: 'white', fontWeight: '500' }}>Login</Text>
-								</TouchableOpacity>
+								</TouchableOpacity>)}
 							</View>
 						</View>
 					</View>
@@ -110,6 +141,11 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		fontWeight: '500',
 		textDecorationLine: 'underline'
+	},
+	error: {
+		color: 'red',
+		fontSize: 12,
+		fontWeight: '700',
 	},
 	textInput: {
 		padding: 10,

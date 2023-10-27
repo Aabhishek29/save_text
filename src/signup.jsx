@@ -9,20 +9,52 @@ import {
 	Platform,
 	TextInput,
 	TouchableOpacity,
-	ImageBackground
+	ImageBackground,
+	ActivityIndicator
 } from 'react-native';
+import { serverUrl } from "./RootNavigation";
+import axios from "axios";
 
 const SignUp = ({navigation}) => {
     const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [pswd, setPswd] = useState("");
+	const [error, showError] = useState(false);
+	const [loading, showLoading] = useState(false);
 
 	const loginScreen = () => {
 		navigation.navigate("Login")
 	}
 
-	const signupUser = () => {
-		// login User
+	const signupUser = async () => {
+		showError(false);
+		if (email === "" || pswd === "")
+			return;
+		showLoading(true);
+		const url = serverUrl + "/users";
+		console.log(url);
+		const payload = {
+			name: name,
+			userName: name+email,
+			email: email,
+			password: pswd,
+			profileUrl: "none",
+			profileImage: "none"
+		}
+		let resp = await axios.post(url, payload)
+			.catch((err) => {
+				console.log(err)
+				showError(true)
+				showLoading(false);
+				return;
+			});
+		if (resp && resp.data && resp.data.status == "success") {
+				navigation.replace("Dashboard");
+		} else {
+			showError(true)
+			// show toast message something went wrong please try again
+		}
+		showLoading(false);
 	}
 
 	return (
@@ -70,10 +102,15 @@ const SignUp = ({navigation}) => {
 								placeholderTextColor={"#a8a8a8"}
 								style={styles.textInput}
 							/>
+							{error && <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
+								<Text style={styles.error}>Something went wrong. Please try again later</Text>
+							</View>}
 							<View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
-								<TouchableOpacity style={styles.loginBtn} onPress={signupUser}>
+							{loading ? (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+									<ActivityIndicator size={'large'} color={'blue'} />
+								</View>) : (<TouchableOpacity style={styles.loginBtn} onPress={signupUser}>
 									<Text style={{color: 'white', fontWeight: '500'}}>SignUp</Text>
-								</TouchableOpacity>
+								</TouchableOpacity>)}
 							</View>
 						</View>
 					</View>
@@ -122,6 +159,11 @@ const styles = StyleSheet.create({
 		fontSize: 12, 
 		fontWeight: '500',
 		textDecorationLine: 'underline'
+	},
+	error: {
+		color: 'red',
+		fontSize: 12,
+		fontWeight: '700',
 	},
 	textInput: {
 		padding: 10,
